@@ -2,20 +2,32 @@ import { Grid, Typography, Box, Stack, Paper } from '@mui/material';
 import React from 'react';
 import HexagonIcon from '@mui/icons-material/Hexagon';
 import { experimentalStyled as styled } from '@mui/material/styles';
+import axios from 'axios';
+
+const getApplicationLogs = async () => {
+    const response = await axios.get(
+        'https://api.coindesk.com/v1/bpi/currentprice.json'
+    );
+    console.log(response.data);
+};
 
 const getApplicationData = () => {
     const data = [];
     for (let i = 0; i < 10; i++) {
         data.push(
-            <Grid item xs={2} sm={4} md={4} key={i}>
-                {/* <Item>xs=2</Item> */}
+            <Grid item xs={6} sm={4} key={i}>
                 <Stack
                     direction="row"
                     justifyContent="space-between"
                     alignItems="center"
                 >
                     <Typography variant="subtitle2">ESB</Typography>
-                    <HexagonIcon />
+                    <HexagonIcon
+                        sx={{ color: 'red' }}
+                        onClick={() => {
+                            getApplicationLogs();
+                        }}
+                    />
                 </Stack>
             </Grid>
         );
@@ -34,30 +46,6 @@ const Item = styled(Paper)(({ theme }) => ({
 const HomePage = () => {
     return (
         <>
-            <Box className="inner-container">
-                <Typography variant="subtitle2">
-                    Application Services
-                </Typography>
-                <Grid
-                    container
-                    spacing={{ xs: 1 }}
-                    columns={{ xs: 4, sm: 8, md: 12 }}
-                >
-                    {getApplicationData()}
-                </Grid>
-            </Box>
-            <Box className="inner-container">
-                <Typography variant="subtitle2">
-                    Application Services
-                </Typography>
-                <Grid
-                    container
-                    spacing={{ xs: 1 }}
-                    columns={{ xs: 4, sm: 8, md: 12 }}
-                >
-                    {getApplicationData()}
-                </Grid>
-            </Box>
             <Box className="inner-container">
                 <Typography variant="subtitle2">
                     Application Services
